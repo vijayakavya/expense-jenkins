@@ -1,10 +1,38 @@
 - name: Ansible Jobs Create
   hosts: localhost
+  vars:
+    jenkins_url: http://3.89.70.68:8080
+    jenkins_user: admin
+    jenkins_password: "{{ lookup( 'aws_ssm', 'jenkins_password', region='us-east-1' ) }}"
   tasks:
-    - name: Create Jenkins jobs
+    - name: Create Jenkins Job - Frontend
       community.general.jenkins_job:
           config: "{{ lookup('file', 'job.xml') }}"
-          name: test1
-          password: admin123
-          url: http://172.31.40.195:8080
-          user: admin
+          name: frontend
+          password: "{{jenkins_password}}"
+          url: "{{jenkins_url}}"
+          user: "{{jenkins_user}}"
+
+    - name: Create Jenkins Job - Backend
+      community.general.jenkins_job:
+        config: "{{ lookup('file', 'job.xml') }}"
+        name: backend
+        password: "{{jenkins_password}}"
+        url: http://172.31.40.195:8080
+        user: "{{jenkins_user}}"
+
+    - name: Create Jenkins Job - Expense Parameters
+      community.general.jenkins_job:
+        config: "{{ lookup('file', 'job.xml') }}"
+        name: expense-parameters
+        password: "{{jenkins_password}}"
+        url: http://172.31.40.195:8080
+        user: "{{jenkins_user}}"
+
+    - name: Create Jenkins Job - Expense Terraform
+      community.general.jenkins_job:
+        config: "{{ lookup('file', 'job.xml') }}"
+        name: expense-terraform
+        password: "{{jenkins_password}}"
+        url: http://172.31.40.195:8080
+        user: "{{jenkins_user}}"
