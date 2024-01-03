@@ -1,7 +1,7 @@
 - name: Ansible Jobs Create
   hosts: localhost
   vars:
-    jenkins_url: http://54.144.26.181:8080
+    jenkins_url: http://3.94.208.122:8080
     jenkins_user: admin
     jenkins_password: "{{ lookup( 'aws_ssm', 'jenkins_password', region='us-east-1' ) }}"
   tasks:
@@ -20,7 +20,7 @@
         config: "{{ lookup('template', 'job.xml') }}"
         name: backend
         password: "{{jenkins_password}}"
-        url: http://54.144.26.181:8080
+        url: http://3.94.208.122:8080
         user: "{{jenkins_user}}"
       vars:
           repo_name: parameter-store
@@ -30,7 +30,7 @@
         config: "{{ lookup('template', 'job.xml') }}"
         name: expense-parameters
         password: "{{jenkins_password}}"
-        url: http://54.144.26.181:8080
+        url: http://3.94.208.122:8080
         user: "{{jenkins_user}}"
       vars:
           repo_name: backend
@@ -40,7 +40,7 @@
         config: "{{ lookup('template', 'job.xml') }}"
         name: expense-terraform
         password: "{{jenkins_password}}"
-        url: http://54.144.26.181:8080
+        url: http://3.94.208.122:8080
         user: "{{jenkins_user}}"
       vars:
           repo_name: expense-terraform
