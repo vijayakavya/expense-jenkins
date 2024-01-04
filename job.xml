@@ -2,13 +2,33 @@
 <flow-definition plugin="workflow-job@1360.vc6700e3136f5">
     <description></description>
     <keepDependencies>false</keepDependencies>
-    <properties/>
+    <properties>
+        <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+            <triggers>
+                <org.jenkinsci.plugins.gwt.GenericTrigger plugin="generic-webhook-trigger@1.88.2">
+                    <spec></spec>
+                    <regexpFilterText></regexpFilterText>
+                    <regexpFilterExpression></regexpFilterExpression>
+                    <printPostContent>false</printPostContent>
+                    <printContributedVariables>false</printContributedVariables>
+                    <causeString>Generic Cause</causeString>
+                    <token>backend</token>
+                    <tokenCredentialId></tokenCredentialId>
+                    <silentResponse>false</silentResponse>
+                    <overrideQuietPeriod>false</overrideQuietPeriod>
+                    <shouldNotFlattern>false</shouldNotFlattern>
+                    <allowSeveralTriggersPerBuild>false</allowSeveralTriggersPerBuild>
+                </org.jenkinsci.plugins.gwt.GenericTrigger>
+            </triggers>
+        </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+    </properties>
+
     <definition class="org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition" plugin="workflow-cps@3806.va_3a_6988277b_2">
         <scm class="hudson.plugins.git.GitSCM" plugin="git@5.2.1">
             <configVersion>2</configVersion>
             <userRemoteConfigs>
                 <hudson.plugins.git.UserRemoteConfig>
-                    <url>https://github.com/vijayakavya/{{repo_name}}</url>
+                    <url>https://github.com/vijayakavya/expense-terraform.git</url>
                 </hudson.plugins.git.UserRemoteConfig>
             </userRemoteConfigs>
             <branches>
