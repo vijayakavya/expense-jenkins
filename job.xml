@@ -2,7 +2,7 @@
 <flow-definition plugin="workflow-job@1360.vc6700e3136f5">
     <description></description>
     <keepDependencies>false</keepDependencies>
-    {% if "{{auto_trigger}}" == "true" %}
+    {% if auto_trigger == "true" %}
     <properties>
         <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
             <triggers>
