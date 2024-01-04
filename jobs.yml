@@ -1,7 +1,7 @@
 - name: Ansible Jobs Create
   hosts: localhost
   vars:
-    jenkins_url: http://3.94.208.122:8080
+    jenkins_url: http://54.225.28.188:8080
     jenkins_user: admin
     jenkins_password: "{{ lookup( 'aws_ssm', 'jenkins_password', region='us-east-1' ) }}"
   tasks:
@@ -14,33 +14,37 @@
           user: "{{jenkins_user}}"
       vars:
           repo_name: frontend
+          auto_trigger: "true"
 
     - name: Create Jenkins Job - Backend
       community.general.jenkins_job:
         config: "{{ lookup('template', 'job.xml') }}"
         name: backend
         password: "{{jenkins_password}}"
-        url: http://3.94.208.122:8080
+        url: http://54.225.28.188:8080
         user: "{{jenkins_user}}"
       vars:
-          repo_name: parameter-store
+          repo_name: backend
+          auto_trigger: "true"
 
     - name: Create Jenkins Job - Expense Parameters
       community.general.jenkins_job:
         config: "{{ lookup('template', 'job.xml') }}"
         name: expense-parameters
         password: "{{jenkins_password}}"
-        url: http://3.94.208.122:8080
+        url: http://54.225.28.188:8080
         user: "{{jenkins_user}}"
       vars:
-          repo_name: backend
+          repo_name: parameter-store
+          auto_trigger: "false"
 
     - name: Create Jenkins Job - Expense Terraform
       community.general.jenkins_job:
         config: "{{ lookup('template', 'job.xml') }}"
         name: expense-terraform
         password: "{{jenkins_password}}"
-        url: http://3.94.208.122:8080
+        url: http://54.225.28.188:8080
         user: "{{jenkins_user}}"
       vars:
           repo_name: expense-terraform
+          auto_trigger: "false"
